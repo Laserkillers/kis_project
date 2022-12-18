@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--Путь к диску-->
+    <!--<classPathEntry location="C:\repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar" />-->
+
+    <!--Подключение к базе данных-->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--Комментарий-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <!--Адрес подключения к базе данных и пароль учетной записи-->
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                        connectionURL="jdbc:postgresql://localhost:5432/app_fs"
+                        userId="tstadmin"
+                        password="12345">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--Создать место хранения класса сущностей-->
+        <javaModelGenerator targetPackage="com.wfking.user.entity" targetProject="src/main/java">
+            <!--Добавлять ли конструктор в модель-->
+            <property name="constructorBased" value="false"/>
+            <!--Разрешить ли подпакеты-->
+            <property name="enableSubPackages" value="true"/>
+            <!--Является ли созданный объект модели неизменным, то есть созданная модель не имеет метода установки-->
+            <property name="immutable" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--Создать место хранения файла сопоставления-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--Создайте место хранения класса Dao-->
+        <!--  Код клиента,Создайте простой в использовании код для объектов модели и файлов конфигурации XML
+        type="ANNOTATEDMAPPER",  Генерация Java-модели и объектов Mapper на основе аннотаций
+        type="MIXEDMAPPER",  Генерация Java-модели на основе аннотаций и соответствующих объектов Mapper
+        type="XMLMAPPER",  Создать XML-файл SQLMap и независимый интерфейс Mapper
+        -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.wfking.user.dao"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--Пожалуйста, измените конфигурацию в соответствии с именем таблицы, соответствующей вашей базе данных, здесь только для справки-->
+        <!--Создать таблицу соответствия и имя класса-->
+        <table tableName="tm_objects" domainObjectName="TM_objects"
+        enableInsert="true"
+        enableSelectByExample="true"
+        enableDeleteByPrimaryKey="true"
+        enableDeleteByExample="true"
+        enableCountByExample="true"
+        enableUpdateByExample="true"
+        enableSelectByPrimaryKey="true"
+        enableUpdateByPrimaryKey="true">
+        </table>
+</context>
+
+        </generatorConfiguration>
